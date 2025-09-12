@@ -1,0 +1,18 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+img {
+    width: 100%;
+    height: 100%;
+}
+.container{
+    position: relative;
+}
+#start_screen {
+    position: absolute;
+}
+#user_name {
+    width: 700px;
+    height: 30px;
+}
