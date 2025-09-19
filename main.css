@@ -1,0 +1,44 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+img {
+     max-height: 100vh;
+    width: 100%; 
+    display: block; 
+    margin: 0 auto;
+}
+.container{
+    position: relative;
+}
+#start_screen {
+    position: absolute;
+    top: 50%;
+    left: 41%;
+    padding: 10px;
+    border-radius: 5px;
+}
+#user_name {
+    width: 250px;
+    height: 40px;
+    text-align: center;
+    border-radius: 13px;
+    margin-bottom: 5px;
+}
+#start {
+    width: 150px;
+    height: 40px;
+    border-radius: 11px;
+    background-color: #fff;
+}
+#start:hover{
+    background-color: #ddd;
+}
+#screen {
+    position: absolute;
+    top: 50%;
+    left: 41%;
+    padding: 10px;
+    border-radius: 5px;
+     background-color: rgba(255, 255, 255, 0.7); 
+}
