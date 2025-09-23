@@ -130,8 +130,9 @@ class Game {
             this.updateHeroState();
             this.showMessage(`HP를 20 회복했고, ${monster.atk}의 피해를 받았습니다.`);
         } else if (input === '3') {
-            this.showMessage('몬스터에게 도망을 쳤습니다. <br>경험치 5가 깎입니다.');
+            this.showMessage('몬스터에게 도망을 쳤습니다. <br>경험치 5와 체력 15가 깎입니다.');
             this.hero.getXp(-5);
+            this.hero.getHp(-15);
             this.monster = null;
             this.updateHeroState();
             this.updateMonsterState();
@@ -201,6 +202,11 @@ class Hero extends Unit{
             this.atk += 5;
             this.hp = this.maxhp;
         }
+    }
+     getHp(hp) {
+        this.hp += hp;
+        if (this.hp > this.maxhp) this.hp = this.maxhp;
+        if (this.hp < 0) this.hp = 0;
     }
 }
 

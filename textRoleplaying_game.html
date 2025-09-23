@@ -10,6 +10,7 @@
 <body>
 <div class="container">
     <img src="./images/던전 입구 메인 배경 사진.png">
+    <button id="restart_button" style="display:none; margin-bottom:10px;">다시 시작</button>
     <form id="start_screen">
         <input id="user_name" placeholder="주인공 이름을 입력하세요.">
         <br>
@@ -17,7 +18,8 @@
     </form>
     <div id="screen">
         <div id="hero_stat">
-            <span id="hero_name"></span>
+            <p class="user_nickname">NickName : </p><span id="hero_name"></span>
+            <br>
             <span id="hero_level"></span>
             <span id="hero_hp"></span>
             <span id="hero_xp"></span>
@@ -26,7 +28,7 @@
         <form id="game_menu" style="display: none">
             <div id="menu_1">1. 모험</div>
             <div id="menu_2">2. 휴식</div>
-            <div id="menu_3">3. 종료</div>
+            <div id="menu_3">3. 던전 나가기</div>
             <input id="menu_input">
             <button id="menu_button">입력</button>
         </form>
