@@ -13,6 +13,7 @@ const $monsterName = document.querySelector('#monster_name');
 const $monsterHp = document.querySelector('#monster_hp');
 const $monsterAtk = document.querySelector('#monster_atk');
 const $message = document.querySelector('#message');
+const btn = document.getElementById("restart_button");
 
 
 class Game {
@@ -70,6 +71,7 @@ class Game {
             this.monster = null;
             this.updateMonsterState();
             this.changeScreen('start');
+            document.getElementById("restart_button").style.display = "";
         }
     }
     createMonster() {
@@ -220,3 +222,9 @@ $startScreen.addEventListener('submit', (event) => {
     const name = event.target['user_name'].value;
     game = new Game(name);
 })
+
+// 영역 숨기기 나타내기 영역
+document.getElementById('start').addEventListener('click', function() {
+    document.getElementById('start_screen').style.display = 'none';
+    document.getElementById('screen').style.display = 'block';
+});
