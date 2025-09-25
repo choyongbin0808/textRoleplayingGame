@@ -1,8 +1,4 @@
-* {
-    padding: 0;
-    margin: 0;
-}
-img {
+#mainimg {
      max-height: 100vh;
     width: 100%; 
     display: block; 
@@ -11,16 +7,21 @@ img {
 .container{
     position: relative;
 }
+hr{
+    border: 1px solid #000;
+}
 #start_screen {
     position: absolute;
     top: 50%;
     left: 40%;
     padding: 10px;
     border-radius: 5px;
-
 }
 #user_nickname, #hero_name{
     display: inline;
+}
+#hero_name {
+    width: 200px;
 }
 #user_name {
     width: 300px;
@@ -38,10 +39,11 @@ img {
 #start:hover{
     background-color: #ddd;
 }
-#screen {
+#screen{
+    width: 400px;
     position: absolute;
-    top: 40%;
-    left: 39%;
+    top: 20%;
+    left: 38%;
     padding: 10px;
     border-radius: 5px;
      background-color: rgba(255, 255, 255, 0.9); 
@@ -52,20 +54,38 @@ img {
 #hero_stat img {
     width: 120px;
     height: 180px;
-    padding-right: 15px;
+    margin: 0;
 }
 #hero_stat {
-    padding-bottom: 5px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+#hero_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+#hero_info span, p {
+    margin-bottom: 10px;
+}
+#entry {
+    margin-left: 90px;
 }
 #menu_input , #battle_input{
     width: 200px;
-    height: 30px;
+    height: 40px;
     border-radius: 6px;
+    margin-bottom: 4px;
+    font-size: 20px;
+    font-weight: 700;
 }
 #menu_button , #battle_button{
-    width: 40px;
-    height: 30px;
-    border-radius: 5px;
+    height: 45px;
+    width: 150px;
+    padding: 0px;
+    margin-left: 30px;
+    border-radius: 6px;
     font-weight: bold;
     background-color: #fff;
 }
@@ -82,10 +102,46 @@ img {
 #battle_3 {
     padding-bottom: 10px;
 }
-#restart {
-    width: 150px;
-    height: 50px;
+#death_screen {
+    top: 50%;
+    left: 41.5%;
+    position: absolute;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.9); 
     font-size: 20px;
-    font-weight: 500;
-    display: none;
+    font-weight: bold;
+}
+#death_screen > h2 {
+    font-size: 20px;
+    font-weight: 800;
+}
+#restart_button {
+    width: 130px;
+    height: 35px;
+    border-radius: 5px;
+    font-size: 17px;
+    font-weight: bold;
+}
+#restart_button:hover {
+    background-color: #bbb;
+    color: white;
+}
+#menus,#battles{
+    font-size: 30px;
+    font-weight: 650;
+    margin-left: 125px;
+}
+#monster_display {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+#monster_display_img {
+    width: 120px;
+    height: 180px;
+    margin-right: 20px;
+}
+#monster_display_info p {
+    margin: 5px 0;
 }

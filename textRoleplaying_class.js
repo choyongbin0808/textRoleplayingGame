@@ -8,13 +8,10 @@ const $heroHp = document.querySelector('#hero_hp');
 const $heroXp = document.querySelector('#hero_xp');
 const $heroAtk = document.querySelector('#hero_atk');
 
-
-const $monsterName = document.querySelector('#monster_name');
-const $monsterHp = document.querySelector('#monster_hp');
-const $monsterAtk = document.querySelector('#monster_atk');
+// const $monsterName = document.querySelector('#monster_name');
+// const $monsterHp = document.querySelector('#monster_hp');
+// const $monsterAtk = document.querySelector('#monster_atk');
 const $message = document.querySelector('#message');
-const btn = document.getElementById("restart_button");
-
 
 class Game {
     constructor(name) {
@@ -35,20 +32,29 @@ class Game {
         this.updateHeroState();
     }
     changeScreen(screen) {
-        if (screen === 'start') {
-            $startScreen.style.display = 'block';
-            $gameMenu.style.display = 'none';
-            $battleMenu.style.display = 'none';
-        } else if (screen === 'game') {
-            $startScreen.style.display = 'none';
-            $gameMenu.style.display = 'block';
-            $battleMenu.style.display = 'none';
-        } else if (screen === 'battle') {
-            $startScreen.style.display = 'none';
-            $gameMenu.style.display = 'none';
-            $battleMenu.style.display = 'block';
-        }
+    if (screen === 'start') {
+        $startScreen.style.display = 'block';
+        document.getElementById('screen').style.display = 'none';
+        $gameMenu.style.display = 'none';
+        $battleMenu.style.display = 'none';
+    } else if (screen === 'game') {
+        $startScreen.style.display = 'none';
+        document.getElementById('screen').style.display = 'block';
+        $gameMenu.style.display = 'block';
+        $battleMenu.style.display = 'none';
+    } else if (screen === 'battle') {
+        $startScreen.style.display = 'none';
+        document.getElementById('screen').style.display = 'block';
+        $gameMenu.style.display = 'none';
+        $battleMenu.style.display = 'block';
     }
+     else if (screen === 'death') {
+        $startScreen.style.display = 'none';
+        document.getElementById('screen').style.display = 'none';
+        document.getElementById('death_screen').style.display = 'block';
+    }
+}
+
     onGameMenuInput = (event) => {
         event.preventDefault();
         const input = event.target['menu_input'].value;
@@ -84,19 +90,34 @@ class Game {
             randomMonster.xp,
         );
         this.updateMonsterState();
-        this.showMessage(`몬스터와 마주쳤다. ${this.monster.name}인 것 같다!`);
+        this.showMessage(`몬스터와 마주쳤다.`);
     }
     updateMonsterState() {
-        const {monster} = this;
-        if (monster === null) {
-            $monsterName.textContent = '';
-            $monsterHp.textContent = '';
-            $monsterAtk.textContent = '';
-            return;
-        }
-        $monsterName.textContent = monster.name;
-        $monsterHp.textContent = `HP ${monster.hp}/${monster.maxhp}`;
-        $monsterAtk.textContent = `ATK ${monster.atk}`;
+    const { monster } = this;
+
+    const monsterDisplay = document.getElementById('monster_display');
+    const monsterImg = document.getElementById('monster_display_img');
+    const nameElem = document.getElementById('display_monster_name');
+    const hpElem = document.getElementById('display_monster_hp');
+    const atkElem = document.getElementById('display_monster_atk');
+
+    if (monster === null) {
+        monsterDisplay.style.display = 'none';
+        nameElem.textContent = '';
+        hpElem.textContent = '';
+        atkElem.textContent = '';
+        monsterImg.src = '';
+        return;
+    }
+
+    monsterDisplay.style.display = 'flex';
+
+    const imageName = `${monster.name}.png`;
+    monsterImg.src = `./images/${imageName}`;
+
+    nameElem.textContent = monster.name;
+    hpElem.textContent = `HP : ${monster.hp}/${monster.maxhp}`;
+    atkElem.textContent = `ATK : ${monster.atk}`;
     }
     showMessage(text) {
         $message.innerHTML = text;
@@ -109,8 +130,9 @@ class Game {
             hero.attack(monster);
             monster.attack(hero);
             if (hero.hp <= 0) {
-                this.showMessage(`${hero.lev}레벨에서 사망하였습니다....`)
-                this.quit();
+                document.getElementById('death_message').textContent = `${hero.lev} 레벨에서 사망하였습니다...`;
+                this.changeScreen('death');
+                return;
             } else if (monster.hp <= 0) {
                 this.showMessage(`몬스터를 잡아 ${monster.xp}의 경험치를 획득했다.`);
                 hero.getXp(monster.xp);
@@ -126,15 +148,21 @@ class Game {
         } else if (input === '2') {
             hero.heal(monster)
             if (hero.hp <= 0){
-                this.showMessage(`${hero.lev}레벨에서 사망하였습니다...`)
-                this.quit();
+                document.getElementById('death_message').textContent = `${hero.lev} 레벨에서 사망하였습니다...`;
+                this.changeScreen('death');
+                return;
             }
             this.updateHeroState();
             this.showMessage(`HP를 20 회복했고, ${monster.atk}의 피해를 받았습니다.`);
         } else if (input === '3') {
-            this.showMessage('몬스터에게 도망을 쳤습니다. <br>경험치 5와 체력 15가 깎입니다.');
-            this.hero.getXp(-5);
+            this.showMessage('몬스터에게 도망을 쳤습니다. <br>경험치 10와 체력 15가 깎입니다.');
+            this.hero.getXp(-10);
             this.hero.getHp(-15);
+            if (this.hero.hp <= 0) {
+                document.getElementById('death_message').textContent = `${this.hero.lev} 레벨에서 사망하였습니다...`;
+                this.changeScreen('death');
+                return;
+            }
             this.monster = null;
             this.updateHeroState();
             this.updateMonsterState();
@@ -149,6 +177,7 @@ class Game {
         $gameMenu.removeEventListener('submit', this.onGameMenuInput);
         $battleMenu.removeEventListener('submit', this.onBattleMenuInput);
         this.changeScreen('start');
+        this.changeScreen('death'); 
         game = null;
     }
 
@@ -223,8 +252,6 @@ $startScreen.addEventListener('submit', (event) => {
     game = new Game(name);
 })
 
-// 영역 숨기기 나타내기 영역
-document.getElementById('start').addEventListener('click', function() {
-    document.getElementById('start_screen').style.display = 'none';
-    document.getElementById('screen').style.display = 'block';
+document.getElementById("restart_button").addEventListener("click", () => {
+    location.reload();
 });

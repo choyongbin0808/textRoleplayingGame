@@ -9,8 +9,7 @@
 </head>
 <body>
 <div class="container">
-    <img src="./images/던전 입구 메인 배경 사진.png">
-    <button id="restart_button" style="display:none; margin-bottom:10px;">다시 시작</button>
+    <img src="./images/던전 입구 메인 배경 사진.png" id="mainimg">
     <form id="start_screen">
         <input id="user_name" placeholder="주인공 이름을 입력하세요.">
         <br>
@@ -19,33 +18,52 @@
     <div id="screen">
         <div id="hero_stat">
             <img src="./images/용사.png" id="knight">
-            <p><span>Nickname : </span> <span id="hero_name"></span></p>
+        <div id="hero_info">
+            <p style="margin-top: 0; margin-bottom: 10px; width: 200px;"><span>Nickname : </span> <span id="hero_name"></span></p>
             <span id="hero_level"></span>
             <span id="hero_hp"></span>
             <span id="hero_xp"></span>
             <span id="hero_atk"></span>
         </div>
+        </div>
+        <hr>
         <form id="game_menu" style="display: none">
-            <div id="menu_1">1. 모험</div>
-            <div id="menu_2">2. 휴식</div>
-            <div id="menu_3">3. 던전 나가기</div>
-            <input id="menu_input">
-            <button id="menu_button">입력</button>
+            <div id="menus">
+                <div id="menu_1">1 | 모험</div>
+                <div id="menu_2">2 | 휴식</div>
+                <div id="menu_3">3 | 던전 나가기</div>
+            </div>
+            <div id="entry">
+                <input id="menu_input">
+                <br>
+                <button id="menu_button">입력</button>
+            </div>
         </form>
         <form id="battle_menu" style="display: none;">
-            <div id="battle_1">1. 공격</div>
-            <div id="battle_2">2. 회복</div>
-            <div id="battle_3">3. 도망</div>
-            <input id="battle_input">
-            <button id="battle_button">입력</button>
+            <div id="battles">
+                <div id="battle_1">1 | 공격</div>
+                <div id="battle_2">2 | 회복</div>
+                <div id="battle_3">3 | 도망</div>
+            </div>
+            <div id="entry">
+                <input id="battle_input">
+                <br>
+                <button id="battle_button">입력</button>
+            </div>
         </form>
         <div id="message"></div>
-        <button id="restart">다시시작</button>
-        <div id="monster_stat">
-            <span id="monster_name"></span>
-            <span id="monster_hp"></span>
-            <span id="monster_atk"></span>
+        <div id="monster_display" style="display: none;">
+        <img src="" alt="Monster Image" id="monster_display_img">
+        <div id="monster_display_info">
+        <p><strong><span id="display_monster_name"></span></strong></p>
+        <p><span id="display_monster_hp"></span></p>
+        <p><span id="display_monster_atk"></span></p>
         </div>
+        </div>
+    </div>
+    <div id="death_screen" style="display: none; text-align: center;">
+    <h2 id="death_message"></h2>
+    <button id="restart_button">다시 시작하기</button>
     </div>
 </div>
     <script src="./textRoleplaying_class.js"></script>
